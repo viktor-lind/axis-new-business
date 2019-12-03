@@ -2,6 +2,8 @@ import * as React from 'react';
 
 import { getUsers } from './api/getUsers.js';
 
+import { LoginForm } from './containers/loginForm';
+
 
 function App() {
 	const [users, setUsers] = React.useState([]);
@@ -16,9 +18,9 @@ function App() {
 
 		fetchUsers();
 	}, []);
-	console.log(users)
+
 	return (
-		<React.Fragment />
+		<LoginForm users={users} />
 	);
 }
 
