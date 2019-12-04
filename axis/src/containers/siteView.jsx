@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 
 import { SiteContainer } from '../presentational/siteContainer';
 import { getSitesForUser } from '../redux/reducers/sites';
+import { setActiveSite } from '../redux/reducers/sites';
+import { getDevices } from '../redux/reducers/devices';
 
 const mapStateToProps = (state) =>
 ({
@@ -12,19 +14,22 @@ const mapStateToProps = (state) =>
 
 const mapDispatchToProps = (dispatch) =>
 ({
-    getSites: (username) => {dispatch(getSitesForUser({ username }))}
+    getSites: (username) => dispatch(getSitesForUser({ username })),
+    getAllDevices: () => dispatch(getDevices()),
+    setActiveSite: (siteId) => dispatch(setActiveSite({ siteId })),
 });
 
-export const SiteView = ({ username, getSites, userSites }) =>
+export const SiteView = ({ username, getSites, userSites, setActiveSite, getAllDevices }) =>
 {
     React.useEffect(() =>
     {
         getSites(username);
+        getAllDevices();
     }, [])
 
     if(userSites.sites != null)
     {
-        return <SiteContainer sites={userSites.sites} />
+        return <SiteContainer sites={userSites.sites} setActiveSite={setActiveSite}/>
     }
     else
     {
