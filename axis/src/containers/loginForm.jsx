@@ -1,18 +1,25 @@
 import React from 'react';
+import { connect } from 'react-redux';
 
 import Container from '@material-ui/core/Container';
 import Button from '@material-ui/core/Button';
 import { TextFieldComponent } from '../presentational/textField';
-import { loginUser } from '../api/loginUser';
 
-export const LoginForm = ({ users }) =>
+import { loginUser } from '../redux/reducers/access';
+
+const mapDispatchToProps = (dispatch) =>
+({
+    loginUser: ({username, password}) => dispatch(loginUser({username, password})),
+})
+
+export const LoginForm = ({ loginUser }) =>
 {
     const [username, setUsername] = React.useState('');
     const [password, setPassword] = React.useState('');
 
     const loginUserOnClick = () =>
     {
-        loginUser({users, username, password})
+        loginUser({username, password})
     };
 
     return (
@@ -33,3 +40,5 @@ export const LoginForm = ({ users }) =>
         </Container>
     );
 }
+
+export const LoginFormConnected = connect(null, mapDispatchToProps)(LoginForm);
