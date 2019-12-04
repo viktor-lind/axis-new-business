@@ -3,7 +3,12 @@ import { getUsers } from '../../api/getUsers';
 
 const LOGIN_USER = 'LOGIN_USER';
 
-export function accessReducer(state = {}, action)
+const initialState = {
+    loggedIn: false,
+    username: '',
+};
+
+export function accessReducer(state = initialState, action)
 {
     switch(action.type)
     {
@@ -11,7 +16,8 @@ export function accessReducer(state = {}, action)
         {
             return {
                 ...state,
-                loggedIn: action.payload,
+                loggedIn: action.loggedIn,
+                username: action.username,
             };
         }
         default:
@@ -19,11 +25,12 @@ export function accessReducer(state = {}, action)
     };
 }
 
-export const loginUserAction = ({ payload }) =>
+export const loginUserAction = ({ loggedIn, username }) =>
 {
     return {
         type: LOGIN_USER,
-        payload: payload,
+        loggedIn: loggedIn,
+        username: username,
     };
 }
 
@@ -38,7 +45,7 @@ export function loginUser({ username, password })
         });
 
         const userIsLoggedIn = userExists ? true : false;
-       
-        dispatch(loginUserAction({ payload: userIsLoggedIn }));
+
+        dispatch(loginUserAction({ loggedIn: userIsLoggedIn, username }));
     };
 }

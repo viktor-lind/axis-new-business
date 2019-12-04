@@ -2,15 +2,16 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 
 import { LoginView } from './loginView';
+import { SiteViewConnected } from './siteView';
 
 const mapStateToProps = (state) =>
 ({
-    access: state.access,
+    access: state.access.loggedIn,
 });
 
 const MainContainer = ({ access }) =>
 {
-    if (!access.loggedIn)
+    if (!access)
     { 
 	    return (
 		    <LoginView />
@@ -18,7 +19,7 @@ const MainContainer = ({ access }) =>
     }
     else
     {
-        return <p>Logged in</p>
+        return <SiteViewConnected />
     }
 }
 
