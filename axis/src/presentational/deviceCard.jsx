@@ -18,32 +18,27 @@ const StyledExpansionPanelSummary = style(ExpansionPanelSummary)`
 	}
 `;
 
-const StyledExpansionPanelDetails = style(ExpansionPanelDetails)`
-display: block !important;
-	.MuiExpansionPanelDetails-root {
-		display: block;
-	}
-`;
-
 const StyledTypography = style(Typography)`
+	display: block;
+	flex-direction: column;
 `;
 
-export const SiteCard = ({ siteCard, setActiveSite }) =>
+export const DeviceCard = ({ deviceCard }) =>
 {
     return (
         <StyledExpansionPanel>
             <StyledExpansionPanelSummary
 				  expandIcon={<ExpandMoreIcon />}
         	>
-				<StyledTypography variant='h6' display='block' noWrap>{siteCard.title}</StyledTypography>
-				<StyledTypography display='block' noWrap>{'id: ' + siteCard.id}</StyledTypography>
+				<StyledTypography variant='h5' display='block' noWrap>{deviceCard.title}</StyledTypography>
+				<StyledTypography variant='h6' display='block' noWrap>{deviceCard.description}</StyledTypography>
+				<StyledTypography display='block' noWrap>{'id: ' + deviceCard.id}</StyledTypography>
         	</StyledExpansionPanelSummary>
-			<StyledExpansionPanelDetails>
-				<StyledTypography>
-					{'Devices: 5'}
-				</StyledTypography>
-				<Button variant='outlined' onClick={setActiveSite.bind(this, siteCard.id)}>Show Devices</Button>
-			</StyledExpansionPanelDetails>
+			<ExpansionPanelDetails>
+			<StyledTypography>
+				{'Devices: 5'}
+			</StyledTypography>
+			</ExpansionPanelDetails>
         </StyledExpansionPanel>
     )
 }

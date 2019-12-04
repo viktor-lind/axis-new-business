@@ -3,19 +3,27 @@ import { connect } from 'react-redux';
 
 import { LoginView } from './loginView';
 import { SiteViewConnected } from './siteView';
+import { DeviceViewConnected } from './deviceView';
 
 const mapStateToProps = (state) =>
 ({
     access: state.access.loggedIn,
+    activeSite: state.sites.activeSite,
 });
 
-const MainContainer = ({ access }) =>
+const MainContainer = ({ access, activeSite }) =>
 {
     if (!access)
     { 
 	    return (
 		    <LoginView />
 	    );
+    }
+    else if (activeSite != null)
+    {
+        return (
+            <DeviceViewConnected />
+        )
     }
     else
     {

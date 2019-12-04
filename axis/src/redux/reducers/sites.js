@@ -3,9 +3,11 @@ import thunk from 'redux-thunk';
 import { getSites } from '../../api/getSites';
 
 const GET_SITES = 'GET_SITES';
+const SET_ACTIVE_SITE = 'SET_ACTIVE_SITE';
 
 const initialState = {
     sites: null,
+    activeSite: null,
 }
 
 export function sitesReducer(state = initialState, action)
@@ -19,10 +21,26 @@ export function sitesReducer(state = initialState, action)
                 sites: action.sites,
             }
         }
+        case SET_ACTIVE_SITE:
+        {
+            return {
+                ...state,
+                activeSite: action.activeSite,
+            }
+        }
         default:
             return state;
     }
 }
+
+export const setActiveSite = ({ siteId }) =>
+{
+    return {
+        type: SET_ACTIVE_SITE,
+        activeSite: siteId,
+    }
+}
+
 
 const saveSites = ({ sites }) =>
 {
