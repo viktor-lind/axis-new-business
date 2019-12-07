@@ -1,6 +1,12 @@
 import React from 'react';
+import styled from 'styled-components';
 
 import { DeviceCard } from './deviceCard';
+
+const StyledDiv = styled.div`
+    display: inline-flex;
+    text-align: center;
+`;
 
 export const DeviceContainer = ({ devices }) =>
 {
@@ -9,5 +15,9 @@ export const DeviceContainer = ({ devices }) =>
         return <DeviceCard key={device.id} deviceCard={device} />
     });
 
-    return deviceCards;
+    return (
+        <StyledDiv>
+            {deviceCards}
+        </StyledDiv>
+    )
 }

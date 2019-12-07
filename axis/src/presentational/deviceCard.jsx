@@ -1,44 +1,74 @@
 import React from 'react';
-import style from 'styled-components';
-import ExpansionPanel from '@material-ui/core/ExpansionPanel';
-import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
-import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
+import styled from 'styled-components';
+
 import Typography from '@material-ui/core/Typography';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import Button from '@material-ui/core/Button';
+import Card from '@material-ui/core/Card'
+import CardContent from '@material-ui/core/CardContent';
 
-const StyledExpansionPanel = style(ExpansionPanel)`
-	width: 30vw;
-	max-width: 30vw;
+import image from '../assets/camera.png';
+
+const StyledCard = styled(Card)`
+	text-align: left;
+	max-width: 25vw;
+	padding: 1vw;
+	margin: 1vw;
 `;
 
-const StyledExpansionPanelSummary = style(ExpansionPanelSummary)`
-	.MuiExpansionPanelSummary-content {
-		display: block;
-	}
+const StyledImage = styled.img`
+	width: 100%;
 `;
 
-const StyledTypography = style(Typography)`
-	display: block;
-	flex-direction: column;
+const StorageWrapper = styled.div`
+	border: solid 0.5px grey;
+	padding: 8px;
+	margin-bottom: 5px;
+	margin-top: 5px;
 `;
 
 export const DeviceCard = ({ deviceCard }) =>
 {
+	const storages = deviceCard.storages.map((storage, i) =>
+	{
+		return (
+			<StorageWrapper key={i}>
+				<Typography variant="body2" color="textSecondary" component="p">
+					{storage.id}
+				</Typography>
+				<Typography variant="body2" color="textSecondary" component="p">
+					{'Status: ' + storage.state}
+				</Typography>				
+			</StorageWrapper>
+		);
+	});
+
     return (
-        <StyledExpansionPanel>
-            <StyledExpansionPanelSummary
-				  expandIcon={<ExpandMoreIcon />}
-        	>
-				<StyledTypography variant='h5' display='block' noWrap>{deviceCard.title}</StyledTypography>
-				<StyledTypography variant='h6' display='block' noWrap>{deviceCard.description}</StyledTypography>
-				<StyledTypography display='block' noWrap>{'id: ' + deviceCard.id}</StyledTypography>
-        	</StyledExpansionPanelSummary>
-			<ExpansionPanelDetails>
-			<StyledTypography>
-				{'Devices: 5'}
-			</StyledTypography>
-			</ExpansionPanelDetails>
-        </StyledExpansionPanel>
-    )
+		<StyledCard>
+			<Typography gutterBottom variant="h5" component="h2">
+				{deviceCard.title}
+		  	</Typography>
+			<StyledImage src={image} />
+			<CardContent style={{padding: 0}}>
+				<Typography variant="body1" component="p">
+					{deviceCard.description}
+				</Typography>
+				<Typography variant="body1" component="p">
+					{'Connected: ' + deviceCard.connected}
+				</Typography>
+				<Typography variant="body2" color="textSecondary" component="p">
+					{'Enabled: ' + deviceCard.enabled}
+				</Typography>
+				<Typography variant="body2" color="textSecondary" component="p">
+					{'Id: ' + deviceCard.id}
+				</Typography>
+				<Typography variant="body2" color="textSecondary" component="p">
+					{'Model: ' + deviceCard.model}
+				</Typography>
+				<Typography variant="body2" color="textSecondary" component="p">
+					{'Version: ' + deviceCard.version}
+				</Typography>
+				<Typography align='center'>Storages</Typography>
+					{storages.length > 0 ? storages : 'No storages.'}
+			</CardContent>
+		</StyledCard>
+    );
 }
