@@ -52,7 +52,7 @@ const MainContainer = ({ access, activeSite, logoutUser }) =>
                 <Button variant='outlined' onClick={logoutUser}>Logout</Button>
                 {mainContent}
             </div>
-        )
+        );
     }
 }
 

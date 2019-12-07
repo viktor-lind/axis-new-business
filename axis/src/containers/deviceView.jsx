@@ -16,7 +16,7 @@ const StyledDiv = styled(Paper)`
 
 const mapStateToProps = (state) =>
 ({
-    allDevices: state.devices,
+    userDevices: state.devices,
     activeSite: state.sites.activeSite,
 });
 
@@ -25,15 +25,20 @@ const mapDispatchToProps = (dispatch) =>
     resetActiveSite: () => dispatch(setActiveSite({ siteId: null }))
 });
 
-const DeviceView = ({ allDevices, activeSite, resetActiveSite }) =>
+let siteDevices = [];
+
+const DeviceView = ({ userDevices, activeSite, resetActiveSite }) =>
 {
-    const siteDevices = getDevicesForActiveSite({ devices: allDevices.devices, activeSite });
+    if (userDevices.devices.length > 0)
+    {
+        siteDevices = getDevicesForActiveSite({ devices: userDevices.devices, activeSite });
+    }
 
     return (
         <StyledDiv>
             <p>Devices</p>
             <DeviceContainer devices={siteDevices} /><br/>
-            <Button onClick={resetActiveSite}>Back</Button>
+            <Button variant='outlined' onClick={resetActiveSite}>Back</Button>
         </StyledDiv>
     )
 }
