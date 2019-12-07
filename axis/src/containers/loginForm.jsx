@@ -1,11 +1,30 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import Container from '@material-ui/core/Container';
+import styled from 'styled-components';
+
+import Paper from '@material-ui/core/Paper';
 import Button from '@material-ui/core/Button';
 import { TextFieldComponent } from '../presentational/textField';
 
 import { loginUser } from '../redux/reducers/access';
+
+const StyledPaper = styled(Paper)`
+    display: inline-grid;
+    width: 30vw;
+    text-align: center;
+    padding: 10vw;
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+`;
+
+const StyledButton = styled(Button)`
+    width: 70%;
+    margin: auto !important;
+`;
 
 const mapDispatchToProps = (dispatch) =>
 ({
@@ -23,8 +42,8 @@ export const LoginForm = ({ loginUser }) =>
     };
 
     return (
-        <Container>
-            <TextFieldComponent 
+        <StyledPaper>
+            <TextFieldComponent
                 type='username'
                 label='Username'
                 value={username}
@@ -36,8 +55,8 @@ export const LoginForm = ({ loginUser }) =>
                 value={password}
                 onChange={(event) => setPassword(event.target.value)}
             />
-            <Button onClick={loginUserOnClick}>Login</Button>
-        </Container>
+            <StyledButton variant='outlined' onClick={loginUserOnClick}>Login</StyledButton>
+        </StyledPaper>
     );
 }
 

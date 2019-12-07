@@ -1,10 +1,21 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
+import styled from 'styled-components';
+
+import Paper from '@material-ui/core/Paper';
 import { SiteContainer } from '../presentational/siteContainer';
 import { getSitesForUser } from '../redux/reducers/sites';
 import { setActiveSite } from '../redux/reducers/sites';
 import { getDevices } from '../redux/reducers/devices';
+
+const StyledDiv = styled(Paper)`
+    text-align: center;
+    width: 90vw;
+    min-height: 60vh;
+    position: relative;
+    margin: auto;
+`;
 
 const mapStateToProps = (state) =>
 ({
@@ -19,6 +30,8 @@ const mapDispatchToProps = (dispatch) =>
     setActiveSite: (siteId) => dispatch(setActiveSite({ siteId })),
 });
 
+let siteContent = <React.Fragment />;
+
 export const SiteView = ({ username, getSites, userSites, setActiveSite, getAllDevices }) =>
 {
     React.useEffect(() =>
@@ -29,12 +42,23 @@ export const SiteView = ({ username, getSites, userSites, setActiveSite, getAllD
 
     if(userSites.sites != null)
     {
-        return <SiteContainer sites={userSites.sites} setActiveSite={setActiveSite}/>
+        siteContent = (
+            <React.Fragment>
+            <p>Sites</p>
+            <SiteContainer sites={userSites.sites} setActiveSite={setActiveSite}/>
+            </React.Fragment>
+        )
     }
     else
     {
-        return <p>Loading sites</p>
+        siteContent = <p>Loading sites</p>
     }
+
+    return (
+        <StyledDiv>
+            {siteContent}
+        </StyledDiv>
+    )
 }
 
 export const SiteViewConnected = connect(mapStateToProps, mapDispatchToProps)(SiteView)

@@ -1,6 +1,12 @@
 import React from 'react';
+import styled from 'styled-components';
 
 import { SiteCard } from './siteCard';
+
+const StyledDiv = styled.div`
+    display: inline-flex;
+    text-align: center;
+`;
 
 export const SiteContainer = ({ sites, setActiveSite }) =>
 {
@@ -9,5 +15,9 @@ export const SiteContainer = ({ sites, setActiveSite }) =>
         return <SiteCard key={site.id} siteCard={site} setActiveSite={setActiveSite} />
     });
 
-    return siteCards;
+    return (
+        <StyledDiv>
+            {siteCards}
+        </StyledDiv>
+    )
 }
