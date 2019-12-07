@@ -44,7 +44,7 @@ export function devicesReducer(state = initialState, action)
     }
 }
 
-const saveSites = ({ devices }) =>
+const saveDevices = ({ devices }) =>
 {
     return {
         type: GET_DEVICES,
@@ -67,8 +67,15 @@ export function getDevices()
         try
         {
             const devices = await getAllDevices();
-
-            dispatch(saveSites({devices: devices}));
+            
+            if (devices.length > 0)
+            {
+                dispatch(saveDevices({devices: devices}));
+            }
+            else
+            {
+                dispatch(getDevicesError({ errorMessage: 'No devices' }));
+            }
         }
         catch (error)
         {

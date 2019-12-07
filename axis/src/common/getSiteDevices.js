@@ -1,3 +1,4 @@
+//Get devices for active site
 export function getDevicesForActiveSite({ activeSite, devices })
 {
     const siteDevices = [];

@@ -42,12 +42,19 @@ export const SiteView = ({ username, getSites, userSites, setActiveSite, getAllD
 
     if(userSites.sites != null)
     {
-        siteContent = (
-            <React.Fragment>
-            <p>Sites</p>
-            <SiteContainer sites={userSites.sites} setActiveSite={setActiveSite}/>
-            </React.Fragment>
-        )
+        if (userSites.sites.length > 0)
+        { 
+            siteContent = (
+                <React.Fragment>
+                    <p>Sites</p>
+                    <SiteContainer sites={userSites.sites} setActiveSite={setActiveSite}/>
+                </React.Fragment>
+            )
+        }
+        else
+        {
+            siteContent = <p>No site registered for user</p>
+        }
     }
     else
     {

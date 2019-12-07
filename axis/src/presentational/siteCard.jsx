@@ -10,7 +10,8 @@ import CardContent from '@material-ui/core/CardContent';
 
 const StyledCard = styled(Card)`
 	text-align: center;
-	margin: auto;
+	margin: auto 2vw auto 2vw;
+	width: 25vw;
 `;
 
 export const SiteCard = ({ siteCard, setActiveSite, siteDevices }) =>
@@ -23,7 +24,7 @@ export const SiteCard = ({ siteCard, setActiveSite, siteDevices }) =>
 			</Typography>
 		  </CardContent>
 		<CardActions>
-		  <Button size="small" variant='outlined' onClick={setActiveSite.bind(this, siteCard.id)}>
+		  <Button size="medium" variant='outlined' onClick={setActiveSite.bind(this, siteCard.id)}>
 			Show Devices
 		  </Button>
 		</CardActions>

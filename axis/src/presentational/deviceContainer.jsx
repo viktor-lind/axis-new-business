@@ -17,7 +17,7 @@ export const DeviceContainer = ({ devices }) =>
 
     return (
         <StyledDiv>
-            {deviceCards}
+            {deviceCards.length > 0 ? deviceCards : 'No devices'}
         </StyledDiv>
     )
 }

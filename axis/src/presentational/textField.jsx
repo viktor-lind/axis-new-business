@@ -12,6 +12,13 @@ const StyledTextField = styled(TextField)`
 export const TextFieldComponent = ({ type, label, value, onChange }) =>
 {
     return (
-        <StyledTextField type={type} variant='outlined' className='textField' label={label} value={value} onChange={onChange} />
+        <StyledTextField
+            type={type}
+            variant='outlined'
+            className='textField'
+            label={label}
+            value={value}
+            onChange={onChange}
+        />
     );
 }

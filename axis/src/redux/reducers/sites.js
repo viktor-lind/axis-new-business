@@ -79,6 +79,7 @@ const getSitesError = ({ errorMessage }) =>
     };
 }
 
+//Thunk for getting sites for logged in user
 export function getSitesForUser({ username })
 {
     return async (dispatch) =>
@@ -87,16 +88,24 @@ export function getSitesForUser({ username })
         {
             const sites = await getSites();
 
-            const userSites = [];
-            for(var i = 0; i < sites.length; i++)
+            if (sites != null && sites.length > 0)
             {
-                if (sites[i].owner === username)
+                
+                const userSites = [];
+                for(var i = 0; i < sites.length; i++)
                 {
-                    userSites.push(sites[i]);
+                    if (sites[i].owner === username)
+                    {
+                        userSites.push(sites[i]);
+                    }
                 }
+        
+                dispatch(saveSites({sites: userSites}));
             }
-    
-            dispatch(saveSites({sites: userSites}));
+            else
+            {
+                dispatch(getSitesError({ errorMessage: 'Could not get sites' })); 
+            }
         }
         catch (error)
         {

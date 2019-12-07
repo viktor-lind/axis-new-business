@@ -44,6 +44,7 @@ export function accessReducer(state = initialState, action)
     };
 }
 
+//If login succedeed, loggedIn state is set to true
 export const loginUserAction = ({ loggedIn, username }) =>
 {
     return {
@@ -53,6 +54,7 @@ export const loginUserAction = ({ loggedIn, username }) =>
     };
 }
 
+//Logiout user resets access object to initial state
 export const logoutUser = () =>
 {
 	return {
@@ -60,6 +62,7 @@ export const logoutUser = () =>
 	};
 }
 
+//If login failes, save error message to redux
 const loginFailed = ({ errorMessage }) =>
 {
     return {
@@ -68,6 +71,7 @@ const loginFailed = ({ errorMessage }) =>
     };
 }
 
+//Thunk that tries to log in user with given username and password
 export function loginUser({ username, password })
 {
     return async (dispatch) =>

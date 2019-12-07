@@ -66,6 +66,9 @@ export const DeviceCard = ({ deviceCard }) =>
 				<Typography variant="body2" color="textSecondary" component="p">
 					{'Version: ' + deviceCard.version}
 				</Typography>
+				<Typography variant="body2" color="textSecondary" component="p">
+					{'Timezone: ' + deviceCard.timezone}
+				</Typography>
 				<Typography align='center'>Storages</Typography>
 					{storages.length > 0 ? storages : 'No storages.'}
 			</CardContent>
