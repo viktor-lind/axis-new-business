@@ -3,11 +3,12 @@ import { connect } from 'react-redux';
 import styled from 'styled-components';
 
 import Button from '@material-ui/core/Button';
-
 import { LoginView } from './loginView';
 import { SiteViewConnected } from './siteView';
 import { DeviceViewConnected } from './deviceView';
 
+import { setInitialSitesState } from '../redux/reducers/sites';
+import { setInitialDevicesState } from '../redux/reducers/devices';
 import { logoutUser } from '../redux/reducers/access';
 
 const StyledBar = styled.div`
@@ -24,8 +25,13 @@ const mapStateToProps = (state) =>
 
 const mapDispatchToProps = (dispatch) =>
 ({
-    logoutUser: () => dispatch(logoutUser()),
-})
+    logoutUser: () =>
+    (
+        dispatch(logoutUser()),
+        dispatch(setInitialSitesState()),
+        dispatch(setInitialDevicesState())
+    )
+});
 
 let mainContent = <React.Fragment />;
 
@@ -41,7 +47,7 @@ const MainContainer = ({ access, activeSite, logoutUser }) =>
     }
 
     if (!access)
-    { 
+    {
 	    return <LoginView />;
     }
     else

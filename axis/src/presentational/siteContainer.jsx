@@ -19,5 +19,5 @@ export const SiteContainer = ({ sites, setActiveSite }) =>
         <StyledDiv>
             {siteCards}
         </StyledDiv>
-    )
+    );
 }

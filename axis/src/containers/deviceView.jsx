@@ -1,11 +1,13 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import Button from '@material-ui/core/Button';
 import styled from 'styled-components';
-import { getDevicesForActiveSite } from '../common/getSiteDevices';
-import { setActiveSite } from '../redux/reducers/sites';
+
+import Button from '@material-ui/core/Button';
 import Paper from '@material-ui/core/Paper';
 import { DeviceContainer } from '../presentational/deviceContainer';
+
+import { getDevicesForActiveSite } from '../common/getSiteDevices';
+import { setActiveSite } from '../redux/reducers/sites';
 
 const StyledDiv = styled(Paper)`
     text-align: center;

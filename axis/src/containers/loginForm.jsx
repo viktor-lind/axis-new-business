@@ -1,6 +1,5 @@
 import React from 'react';
 import { connect } from 'react-redux';
-
 import styled from 'styled-components';
 
 import Paper from '@material-ui/core/Paper';
@@ -29,7 +28,7 @@ const StyledButton = styled(Button)`
 const mapDispatchToProps = (dispatch) =>
 ({
     loginUser: ({username, password}) => dispatch(loginUser({username, password})),
-})
+});
 
 export const LoginForm = ({ loginUser }) =>
 {
