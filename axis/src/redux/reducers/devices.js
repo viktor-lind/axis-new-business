@@ -2,6 +2,7 @@ import { getAllDevices } from '../../api/getDevices';
 
 const GET_DEVICES = 'GET_DEVICES';
 const GET_DEVICES_ERROR = 'GET_DEVICES_ERROR';
+const SET_INITIAL_STATE = 'SET_INITIAL_STATE';
 
 const initialState = {
     devices: null,
@@ -9,7 +10,7 @@ const initialState = {
         error: false,
         message: null,
     },
-}
+};
 
 export function devicesReducer(state = initialState, action)
 {
@@ -39,11 +40,26 @@ export function devicesReducer(state = initialState, action)
                 },
             };
         }
+        case SET_INITIAL_STATE:
+            {
+                return {
+                    ...initialState,
+                };
+            }
         default:
             return state;
     }
 }
 
+//When user is logging out, reset state to initial state
+export const setInitialDevicesState = () =>
+{
+    return {
+        type: SET_INITIAL_STATE,
+    };
+}
+
+//Save devices to store
 const saveDevices = ({ devices }) =>
 {
     return {
@@ -52,6 +68,7 @@ const saveDevices = ({ devices }) =>
     };
 }
 
+//If devices fetch fails, save error message
 const getDevicesError = ({ errorMessage }) =>
 {
     return {
@@ -60,6 +77,7 @@ const getDevicesError = ({ errorMessage }) =>
     };
 }
 
+//Thunk that calls api function to get all devices
 export function getDevices()
 {
     return async (dispatch) =>

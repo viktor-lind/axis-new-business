@@ -3,6 +3,7 @@ import { getSites } from '../../api/getSites';
 const GET_SITES = 'GET_SITES';
 const SET_ACTIVE_SITE = 'SET_ACTIVE_SITE';
 const GET_SITES_ERROR = 'GET_SITES_ERROR';
+const SET_INITIAL_STATE = 'SET_INITIAL_STATE';
 
 const initialState = {
     sites: null,
@@ -11,7 +12,7 @@ const initialState = {
         error: false,
         message: null,
     },
-}
+};
 
 export function sitesReducer(state = initialState, action)
 {
@@ -49,11 +50,26 @@ export function sitesReducer(state = initialState, action)
                 },
             };
         }
+        case SET_INITIAL_STATE:
+        {
+            return {
+                ...initialState,
+            };
+        }
         default:
             return state;
     };
 }
 
+//When user is logging out, reset state to initial state
+export const setInitialSitesState = () =>
+{
+    return {
+        type: SET_INITIAL_STATE,
+    };
+}
+
+//Save site id for active site
 export const setActiveSite = ({ siteId }) =>
 {
     return {
@@ -62,7 +78,7 @@ export const setActiveSite = ({ siteId }) =>
     };
 }
 
-
+//Save fetched sites to store
 const saveSites = ({ sites }) =>
 {
     return {
@@ -71,6 +87,7 @@ const saveSites = ({ sites }) =>
     };
 }
 
+//Action to save error message if getSites failed
 const getSitesError = ({ errorMessage }) =>
 {
     return {
@@ -79,7 +96,7 @@ const getSitesError = ({ errorMessage }) =>
     };
 }
 
-//Thunk for getting sites for logged in user
+//Thunk that calls api function for getting all sites and only saves sites for current user
 export function getSitesForUser({ username })
 {
     return async (dispatch) =>

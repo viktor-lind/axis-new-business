@@ -1,10 +1,10 @@
 import React from 'react';
 import { connect } from 'react-redux';
-
 import styled from 'styled-components';
 
 import Paper from '@material-ui/core/Paper';
 import { SiteContainer } from '../presentational/siteContainer';
+
 import { getSitesForUser } from '../redux/reducers/sites';
 import { setActiveSite } from '../redux/reducers/sites';
 import { getDevices } from '../redux/reducers/devices';
@@ -38,7 +38,7 @@ export const SiteView = ({ username, getSites, userSites, setActiveSite, getAllD
     {
         getSites(username);
         getAllDevices();
-    }, [])
+    }, []);
 
     if(userSites.sites != null)
     {
@@ -49,23 +49,23 @@ export const SiteView = ({ username, getSites, userSites, setActiveSite, getAllD
                     <p>Sites</p>
                     <SiteContainer sites={userSites.sites} setActiveSite={setActiveSite}/>
                 </React.Fragment>
-            )
+            );
         }
         else
         {
-            siteContent = <p>No site registered for user</p>
+            siteContent = <p>No site registered for user</p>;
         }
     }
     else
     {
-        siteContent = <p>Loading sites</p>
+        siteContent = <p>Loading sites</p>;
     }
 
     return (
         <StyledDiv>
             {siteContent}
         </StyledDiv>
-    )
+    );
 }
 
-export const SiteViewConnected = connect(mapStateToProps, mapDispatchToProps)(SiteView)
+export const SiteViewConnected = connect(mapStateToProps, mapDispatchToProps)(SiteView);
